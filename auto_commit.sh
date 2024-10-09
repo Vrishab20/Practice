@@ -1,18 +1,23 @@
 #!/bin/bash
 
-echo "🔁 Starting auto commit script..."
+echo " ~^ Starting auto commit script..."
 
 # Skip 'cd' if you're already in the repo folder
-
 if [[ -n $(git status -s) ]]; then
-  git add .
+    git add .
 
-  FIXED_DATE="2024-10-09T11:22:30"
-  GIT_COMMITTER_DATE="$FIXED_DATE" git commit --date="$FIXED_DATE" -m "🤖 Auto commit on 2025-04-13 22:47:30"
+    for i in {0..4}; do
+        # Generate a unique backdated timestamp for each commit
+        FIXED_DATE=$(date -d "2024-10-09 11:22:30 + $i minutes" +"%Y-%m-%dT%H:%M:%S")
+        
+        GIT_COMMITTER_DATE="$FIXED_DATE" \
+        git commit --date="$FIXED_DATE" -m " ~^ Auto commit #$((i+1)) with backdated timestamp"
+    done
 
-  git push origin main
-  echo "🚀 Changes pushed to GitHub with fixed backdated commit!"
+    git push origin main
+    echo " ~^ 5 auto commits pushed to GitHub with backdated timestamps!"
 else
-  echo "🟢 No changes to commit."
+    echo " M~ No changes to commit."
 fi
+
 
