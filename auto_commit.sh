@@ -7,7 +7,7 @@ echo "🔁 Starting auto commit script..."
 if [[ -n $(git status -s) ]]; then
   git add .
 
-  FIXED_DATE="2025-02-06T17:40:30"
+  FIXED_DATE="2025-02-06T13:40:30"
   GIT_COMMITTER_DATE="$FIXED_DATE" git commit --date="$FIXED_DATE" -m "🤖 Auto commit on 2025-04-13 22:47:30"
 
   git push origin main
